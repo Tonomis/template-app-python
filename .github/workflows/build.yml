@@ -30,9 +30,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }} # What is this GITHUB_TOKEN ? Why is it working here ?
           logout: true
 
-      - name: Lowercase the namespace and export it as an env variable
+      - name: Lowercase the namespace
         run: |
-          echo "::set-env name=NAMESPACE_LOWER::$(echo $NAMESPACE | tr '[:upper:]' '[:lower:]')"
+          echo "NAMESPACE_LOWER=$(echo ${{env.NAMESPACE}} | tr '[:upper:]' '[:lower:]')"
           
 
       - name: Build and push
@@ -42,4 +42,4 @@ jobs:
           context: packages/streamlit
           platforms: ${{ env.PLATFORM }}
           push: true
-          tags: "${{ env.REGISTRY }}/${NAMESPACE_LOWER}/${{ env.TAG }}"
+          tags: "${{ env.REGISTRY }}/${{env.NAMESPACE_LOWER}}/${{ env.TAG }}"
