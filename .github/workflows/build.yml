@@ -4,11 +4,10 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: # wich registry do you want to use ?
-  NAMESPACE: # wich namespace do you want to use ? what is ${{github.repository }} ?
-  PLATFORM: # wich platform do you want to use ? linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6
-  TAG: # wich tag do you want to use ?
-
+  REGISTRY: ghcr.io # wich registry do you want to use ? docker.io, ghcr.io, ...
+  NAMESPACE: ${{github.repository}}
+  PLATFORM: linux/amd64
+  TAG: 1
 
 jobs:
   docker:
@@ -34,6 +33,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           file: packages/streamlit/Dockerfile
+          context: packages/streamlit
           platforms: ${{ env.PLATFORM }}
           push: true
           tags: "${{ env.REGISTRY }}/${{ env.NAMESPACE }}/${{ env.TAG }}"
