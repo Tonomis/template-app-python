@@ -42,4 +42,6 @@ jobs:
           context: packages/streamlit
           platforms: ${{ env.PLATFORM }}
           push: true
-          tags: "${{ env.REGISTRY }}/${NAMESPACE_LOWER}/${{ env.TAG }}"
+          tags: |
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE_LOWER }}/streamlit:${{ env.TAG }}
+            ${{ env.REGISTRY }}/${{ env.NAMESPACE_LOWER }}/streamlit:latest
