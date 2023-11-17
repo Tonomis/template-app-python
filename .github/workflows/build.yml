@@ -32,7 +32,7 @@ jobs:
 
       - name: Lowercase the namespace
         run: |
-          echo "NAMESPACE_LOWER=$(echo ${{env.NAMESPACE}} | tr '[:upper:]' '[:lower:]')"
+          echo "NAMESPACE_LOWER=$(echo ${{env.NAMESPACE}} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
           
 
       - name: Build and push
